@@ -41,7 +41,11 @@ int ft_lst_size(t_parse *lst)
 
 t_parse *ft_lst_new(char *line)
 {
-    t_parse *new = malloc(sizeof(t_parse));
+    t_parse *new;
+
+	new = malloc(sizeof(t_parse));
+	if (!new)
+		return (NULL);
     new->line = ft_strdup1(line);
     new->next = NULL;
     return new;

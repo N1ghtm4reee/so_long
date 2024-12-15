@@ -1,4 +1,16 @@
-#include "so_long.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_config_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/13 20:30:03 by aakhrif           #+#    #+#             */
+/*   Updated: 2024/12/14 17:10:52 by aakhrif          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "so_long_bonus.h"
 
 int is_outsider_char(char c)
 {
@@ -62,35 +74,6 @@ int get_lines(char **map, t_m_config *map_cnfg, int x_size)
     return (y);
 }
 
-void last_row(char *last_row)
-{
-    int i = 0;
-    while(last_row[i])
-    {
-        if (last_row[i] != '1')
-        {
-            write(2, "INVALID BORDERS\n", 16);
-            exit(2);
-        }
-        i++;
-    }
-}
-
-void flood_fill_check(char **map, int start_x, int start_y, t_m_config *map_cnfg)
-{
-    if (map[start_y][start_x] == 'F' || map[start_y][start_x] == '1')
-        return ;
-    if (map[start_y][start_x] == 'E')
-        map_cnfg->winable = 1;
-    if (map[start_y][start_x] == 'C')
-        map_cnfg->reachable_c++;
-    map[start_y][start_x] = 'F';
-    flood_fill_check(map, start_x++, start_y, map_cnfg);
-    flood_fill_check(map, start_x--, start_y, map_cnfg);
-    flood_fill_check(map, start_x, start_y++, map_cnfg);
-    flood_fill_check(map, start_x, start_y--, map_cnfg);
-}
-
 void flood_fill_check2(char **map, int start_x, int start_y, t_m_config *map_cnfg)
 {
     if (map[start_y][start_x] == 'F' || map[start_y][start_x] == '1')
@@ -104,55 +87,24 @@ void flood_fill_check2(char **map, int start_x, int start_y, t_m_config *map_cnf
     flood_fill_check2(map, start_x--, start_y, map_cnfg);
 }
 
-void is_winable(char **map, t_m_config *map_config)
-{
-    flood_fill_check(map, map_config->player_position[1], map_config->player_position[0], map_config);
-    if (map_config->winable == 0)
-    {
-        write(2, "NOT WINABLE MAP\n", 16);
-        exit(2);
-    }
-    if (map_config->reachable_c != map_config->c_count)
-    {
-        write(2, "NOT REACHABLE COLLECTABLE\n", 26);
-        exit(2);
-    }
-}
-
-void get_player_position(t_m_config *map_config, char **map)
-{
-    int i = 1;
-    int j;
-    while(map[i])
-    {
-        j = 1;
-        while(map[i][j])
-        {
-            if (map[i][j] == 'P')
-            {
-                map_config->player_position[0] = i;
-                map_config->player_position[1] = j;
-            }
-            if (map[i][j] == 'E')
-            {
-                map_config->exit_position[0] = i;
-                map_config->exit_position[1] = j;
-            }
-            j++;
-        }
-        i++;
-    }
-}
-
 char **map_copy(char **map, t_m_config *map_config)
 {
     int i = 0;
-    char **t_map = malloc(sizeof(char *) * (map_config->y_size + 1));
+    char **t_map;
+
+    t_map = malloc(sizeof(char *) * (map_config->y_size + 1));
+    if (!t_map)
+        return (NULL);
     while(map[i])
     {
-        t_map[i] = ft_strdup1(map[i]);
+        t_map[i] = strdup(map[i]);
+        if (!t_map[i])
+        {
+            // free()
+        }
         i++;
     }
+    t_map[i] = NULL;
     return t_map;
 }
 
@@ -197,41 +149,31 @@ void are_all_collectables(char **map, t_m_config *map_config)
     }
 }
 
-void get_map_config(t_m_config *map_config, char **map)
+void enemies_position(char **map, t_m_config *map_cnfg)
 {
+    map_cnfg->enemies_positions = malloc(sizeof(int *) * map_cnfg->enemies_count);
     int i = 0;
-    int j = 0;
-
-    map_config->x_size = get_width(map[0]);
-    map_config->y_size = get_lines(map, map_config, map_config->x_size);
-    if (map_config->x_size == map_config->y_size)
+    while(i < map_cnfg->enemies_count)
     {
-        write(2, "NOT RECTANGULAR MAP\n", 20);
-        exit(2);
+        map_cnfg->enemies_positions[i] = malloc(sizeof(int) * 2);
+        i++;
     }
-    if (map_config->y_size < 3)
+    i = 1;
+    int j;
+    int s = 0;
+    while(map[i])
     {
-        write(2, "TINNY MAP\n", 10);
-        exit(2);
+        j = 1;
+        while(map[i][j])
+        {
+            if (map[i][j] == 'F')
+            {
+                map_cnfg->enemies_positions[s][0] = i;
+                map_cnfg->enemies_positions[s][1] = j;
+                s++;
+            }
+            j++;
+        }
+        i++;
     }
-    last_row(map[map_config->y_size - 1]);
-    if (map_config->c_count == 0)
-    {
-        write(2, "NO COLLECTIBLES\n", 16);
-        exit(2);
-    }
-    if (map_config->player != 1)
-    {
-        write(2, "INVALID PLAYER\n", 15);
-        exit(2);
-    }
-    if (map_config->exit != 1)
-    {
-        write(2, "INVALID EXIT\n", 13);
-        exit(2);
-    }
-    get_player_position(map_config, map);
-    //send a copy to edit on it.
-    is_winable(map_copy(map, map_config), map_config);
-    // are_all_collectables(map, map_config);
 }
