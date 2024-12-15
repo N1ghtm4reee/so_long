@@ -175,7 +175,7 @@ int get_lines(char **map, t_m_config *map_cnfg, int x_size);
 
 //textures
 void init_textures(t_textures *all, t_window *var);
-void print_map_on_screen(char **map, t_m_config map_config, t_window *var, t_textures *all);
+void	print_map_on_screen(char **map, t_window *var, t_textures *all);
 void is_winable(char **map, t_m_config *map_config);
 char	*ft_itoa(int n);
 //keys_hooks
@@ -188,6 +188,7 @@ void ft_lst_addback(t_parse **lst, char *line);
 int ft_lst_size(t_parse *lst);
 char	*ft_strdup1(const char *s);
 
+void	is_right_extension(char *str);
 //free
 void free_list(t_parse **lst);
 void free_map(char **map);
@@ -196,5 +197,5 @@ int close_window(t_window *var);
 
 //
 void	ft_putnbr(int nb);
-
+void	print_moves_nl(int move);
 #endif

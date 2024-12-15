@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:04:36 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/15 13:20:41 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/15 17:41:03 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,85 +29,40 @@ void	last_row(char *last_row, char **map)
 	}
 }
 
-char	**parse(int fd, char **av)
+void	get_player_position(t_m_config *map_config, char **map)
 {
-	char **map = NULL;
-	int t_x = 0;
-	int t_y = 0;
-	int x = 0;
-	int y = 0;
-	char *line;
+	int	i;
+	int	j;
 
-	if (fd == -1)
-		exit(1);
-	line = get_next_line(fd);
-	while(line)
+	i = 1;
+	while (map[i])
 	{
-		y++;
-		free(line);
-		line = get_next_line(fd);
-		if(!line)
-			get_next_line(-2);
-	}
-	close(fd);
-	fd = open(av[1], O_RDONLY);
-	map = malloc(sizeof(char *) * (y + 1));
-	line = get_next_line(fd);
-	map[t_y++] = line;
-	while(line)
-	{
-		line = get_next_line(fd);
-		if(!line)
+		j = 1;
+		while (map[i][j])
 		{
-			get_next_line(-2);
-			break ;
+			if (map[i][j] == 'P')
+			{
+				map_config->player_pos[0] = i;
+				map_config->player_pos[1] = j;
+			}
+			if (map[i][j] == 'E')
+			{
+				map_config->exit_position[0] = i;
+				map_config->exit_position[1] = j;
+				map[i][j] = '0';
+			}
+			j++;
 		}
-		map[t_y++] = line;
+		i++;
 	}
-	map[t_y] = NULL;
-	return (map);
 }
 
-void get_player_position(t_m_config *map_config, char **map)
-{
-    int i = 1;
-    int j;
-    while(map[i])
-    {
-        j = 1;
-        while(map[i][j])
-        {
-            if (map[i][j] == 'P')
-            {
-                map_config->player_pos[0] = i;
-                map_config->player_pos[1] = j;
-            }
-            if (map[i][j] == 'E')
-            {
-                map_config->exit_position[0] = i;
-                map_config->exit_position[1] = j;
-                map[i][j] = '0';
-            }
-            j++;
-        }
-        i++;
-    }
-}
-
-void check_map_config(t_m_config *map_config, char **map)
+void	check_map_config(t_m_config *map_config, char **map)
 {
 	if (map_config->x_size == map_config->y_size)
-	{
-		write(2, "NOT RECTANGULAR MAP\n", 20);
-		free_map(map);
-		exit(2);
-	}
+		return (write(2, "NOT RECTANGULAR MAP\n", 20), free_map(map), exit(1));
 	if (map_config->y_size < 3)
-	{
-		free_map(map);
-		write(2, "TINNY MAP\n", 10);
-		exit(2);
-	}
+		return (write(2, "TINNY MAP\n", 10), free_map(map), exit(1));
 	last_row(map[map_config->y_size - 1], map);
 	if (map_config->c_count == 0)
 	{
@@ -129,13 +84,8 @@ void check_map_config(t_m_config *map_config, char **map)
 	}
 }
 
-void    get_map_config(t_m_config *map_config, char **map)
+void	get_map_config(t_m_config *map_config, char **map)
 {
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
 	map_config->x_size = get_width(map[0], map);
 	map_config->y_size = get_lines(map, map_config, map_config->x_size);
 	check_map_config(map_config, map);

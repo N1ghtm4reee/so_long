@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:13:40 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/15 14:39:37 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/15 14:52:40 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ void	ft_mlx_work(char **map, t_m_config map_config)
 	var.map_cnfg = map_config;
 	init_textures(&all_textures, &var);
 	var.all_textures = all_textures;
+	if (all_textures.wall.img_width * map_config.x_size > MAX_HEIGHT || all_textures.wall.img_height * map_config.y_size > MAX_HEIGHT)
+	{
+		free_map(map);
+		free_int_arr(var.map_cnfg.enemies_positions, var.map_cnfg.enemies_count);
+		write(2, "INVALID RESOLUTION\n", 19);
+		exit(2);
+	}
 	var.mlx_window = mlx_new_window(var.mlx_connection, all_textures.wall.img_width * map_config.x_size,
 						all_textures.wall.img_height * map_config.y_size, "so_long");
 	if (NULL == var.mlx_window)

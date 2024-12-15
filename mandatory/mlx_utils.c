@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:18:15 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/13 20:18:24 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/15 18:46:47 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,35 @@ void	ft_putnbr(int nb)
 	}
 	else
 		ft_putchar(n + '0');
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && (s1[i] == s2[i]))
+		i++;
+	return (s1[i] - s2[i]);
+}
+
+void	is_right_extension(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	i -= 4;
+	if (ft_strcmp(str + i, ".ber"))
+	{
+		write(2, "INVALID FILE EXTENSION\n", 23);
+		exit(1);
+	}
+}
+
+void	print_moves_nl(int move)
+{
+	ft_putnbr(move);
+	write(1, "\n", 1);
 }

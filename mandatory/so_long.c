@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:13:40 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/15 13:20:41 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/15 16:17:45 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,26 @@ void	move_left(char **map, t_m_config *m_con)
 
 int	close_window(t_window *var)
 {
+	mlx_destroy_image(var->mlx_connection,
+		var->all_textures.player.player_down.img_open);
+	mlx_destroy_image(var->mlx_connection,
+		var->all_textures.player.player_down.img_semi);
+	mlx_destroy_image(var->mlx_connection,
+		var->all_textures.player.player_up.img_open);
+	mlx_destroy_image(var->mlx_connection,
+		var->all_textures.player.player_up.img_semi);
+	mlx_destroy_image(var->mlx_connection,
+		var->all_textures.player.player_left.img_open);
+	mlx_destroy_image(var->mlx_connection,
+		var->all_textures.player.player_left.img_semi);
+	mlx_destroy_image(var->mlx_connection,
+		var->all_textures.player.player_right.img_open);
+	mlx_destroy_image(var->mlx_connection,
+		var->all_textures.player.player_right.img_semi);
+	mlx_destroy_image(var->mlx_connection, var->all_textures.collectable.img);
+	mlx_destroy_image(var->mlx_connection, var->all_textures.exit.img);
+	mlx_destroy_image(var->mlx_connection, var->all_textures.field.img);
+	mlx_destroy_image(var->mlx_connection, var->all_textures.wall.img);
 	mlx_destroy_window(var->mlx_connection, var->mlx_window);
 	mlx_destroy_display(var->mlx_connection);
 	free(var->mlx_connection);
@@ -34,7 +54,7 @@ int	close_window(t_window *var)
 	exit(0);
 }
 
-void check_resolution(t_textures all, t_m_config map_config, t_window *var)
+void	check_resolution(t_textures all, t_m_config map_config, t_window *var)
 {
 	if (all.wall.img_width * map_config.x_size > MAX_WIDTH)
 	{
@@ -56,7 +76,7 @@ void check_resolution(t_textures all, t_m_config map_config, t_window *var)
 
 void	ft_mlx_work(char **map, t_m_config map_config)
 {
-	t_textures	all_textures;
+	t_textures		all_textures;
 	static t_window	var;
 
 	var.mlx_connection = mlx_init();
@@ -71,11 +91,8 @@ void	ft_mlx_work(char **map, t_m_config map_config)
 			all_textures.wall.img_width * map_config.x_size,
 			all_textures.wall.img_height * map_config.y_size, "so_long");
 	if (NULL == var.mlx_window)
-	{
-		mlx_destroy_display(var.mlx_connection);
-		free(var.mlx_connection);
-		exit(11);
-	}
+		return (mlx_destroy_display(var.mlx_connection),
+			free(var.mlx_connection), exit(1));
 	mlx_hook(var.mlx_window, 17, 0, close_window, &var);
 	mlx_key_hook(var.mlx_window, key_hook, &var);
 	mlx_loop(var.mlx_connection);
@@ -92,7 +109,7 @@ int	main(int ac, char **av)
 	map = NULL;
 	if (ac != 2)
 		return (1);
-	//check if .ber extension
+	is_right_extension(av[1]);
 	map = parse(open(av[1], O_RDONLY), av);
 	if (!map)
 		return (1);
