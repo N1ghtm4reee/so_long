@@ -8,7 +8,8 @@
 #include <stdint.h>
 #include <string.h>
 #include <math.h>
-#include <mlx.h>
+// #include <mlx.h>
+#include "../minilibx-linux/mlx.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
@@ -34,7 +35,7 @@ typedef struct map_config
     int c_count;
     int exit;
     int player;
-    int player_position[2];//0 -> y | 1 -> x
+    int player_pos[2];//0 -> y | 1 -> x
     int exit_position[2];//0 -> y | 1 -> x
 }   t_m_config;
 
@@ -168,7 +169,7 @@ typedef struct window
 void get_map_config(t_m_config *map_config, char **map);
 
 //map check
-int get_width(char *line);
+int get_width(char *line, char **map);
 int get_lines(char **map, t_m_config *map_cnfg, int x_size);
 // void is_valid_map(char **map);
 

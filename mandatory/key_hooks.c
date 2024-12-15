@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:15:17 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/14 21:25:46 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/15 09:25:46 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void left_key(t_window *var, int player_x, int player_y)
                 var->tmap[player_y][player_x] = '0';
                 var->tmap[player_y][player_x - 1] = 'P';
             }
-            var->map_cnfg.player_position[1]--;
+            var->map_cnfg.player_pos[1]--;
             var->last_key = 'A';
             var->moves++;
         }
@@ -56,7 +56,7 @@ void right_key(t_window *var, int player_x, int player_y)
                 var->tmap[player_y][player_x] = '0';
                 var->tmap[player_y][player_x + 1] = 'P';
             }
-            var->map_cnfg.player_position[1]++;
+            var->map_cnfg.player_pos[1]++;
             var->last_key = 'D';
             var->moves++;
         }
@@ -81,7 +81,7 @@ void up_key(t_window *var, int player_x, int player_y)
                 var->tmap[player_y][player_x] = '0';
                 var->tmap[player_y - 1][player_x] = 'P';
             }
-            var->map_cnfg.player_position[0]--;
+            var->map_cnfg.player_pos[0]--;
             var->last_key = 'W';
             var->moves++;
         }
@@ -106,7 +106,7 @@ void down_key(t_window *var, int player_x, int player_y)
                 var->tmap[player_y][player_x] = '0';
                 var->tmap[player_y + 1][player_x] = 'P';
             }
-            var->map_cnfg.player_position[0]++;
+            var->map_cnfg.player_pos[0]++;
             var->last_key = 'S';
             var->moves++;
         }
@@ -117,8 +117,8 @@ int key_hook(int keycode, t_window *var)
     int y;
     int x;
     int i;
-    int player_x = var->map_cnfg.player_position[1];
-    int player_y = var->map_cnfg.player_position[0];
+    int player_x = var->map_cnfg.player_pos[1];
+    int player_y = var->map_cnfg.player_pos[0];
     if (keycode == 113 || 65307 == keycode)//q
         close_window(var);
     if (keycode == 97)//move left a

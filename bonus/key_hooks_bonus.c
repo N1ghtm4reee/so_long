@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:15:17 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/14 17:11:08 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/15 13:17:35 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,11 @@ void left_key(t_window *var, int player_x, int player_y)
             {
                 write(1, "TRY AGAIN\n", 10);
                 close_window(var);
-                exit(0);
             }
             if ((player_y == var->map_cnfg.exit_position[0] && player_x-1 == var->map_cnfg.exit_position[1]) && var->collected == var->map_cnfg.c_count)
             {
                 write(1, "YOU WON!\n", 9);
                 close_window(var);
-                exit(0);
             }
             if (((player_y == var->map_cnfg.exit_position[0]) && (player_x - 1 == var->map_cnfg.exit_position[1])) && var->collected != var->map_cnfg.c_count)
                 var->tmap[player_y][player_x - 1] = '0';

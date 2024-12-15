@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:04:36 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/15 09:18:46 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/15 14:40:08 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,27 +99,32 @@ void check_map_config(t_m_config *map_config, char **map)
 {
 	if (map_config->x_size == map_config->y_size)
 	{
+		free_map(map);
 		write(2, "NOT RECTANGULAR MAP\n", 20);
 		exit(2);
 	}
 	if (map_config->y_size < 3)
 	{
+		free_map(map);
 		write(2, "TINNY MAP\n", 10);
 		exit(2);
 	}
 	last_row(map[map_config->y_size - 1]);
 	if (map_config->c_count == 0)
 	{
+		free_map(map);
 		write(2, "NO COLLECTIBLES\n", 16);
 		exit(2);
 	}
 	if (map_config->player != 1)
 	{
+		free_map(map);
 		write(2, "INVALID PLAYER\n", 15);
 		exit(2);
 	}
 	if (map_config->exit != 1)
 	{
+		free_map(map);
 		write(2, "INVALID EXIT\n", 13);
 		exit(2);
 	}
@@ -132,7 +137,7 @@ void    get_map_config(t_m_config *map_config, char **map)
 
 	i = 0;
 	j = 0;
-	map_config->x_size = get_width(map[0]);
+	map_config->x_size = get_width(map[0], map);
 	map_config->y_size = get_lines(map, map_config, map_config->x_size);
 	check_map_config(map_config, map);
 	get_player_position(map_config, map);

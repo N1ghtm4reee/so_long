@@ -8,17 +8,15 @@
 #include <stdint.h>
 #include <string.h>
 #include <math.h>
-#include <mlx.h>
-// #include "minilibx-linux/mlx_int.h"
+// #include <mlx.h>
+#include "../minilibx-linux/mlx.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
 # endif
 
-#define WIDTH 1400
-#define HEIGHT 750
-#define X 50
-#define Y 50
+#define MAX_WIDTH 1920
+#define MAX_HEIGHT 1080
 
 int		ft_strchr(char *s, char c);
 size_t	ft_strlen(char *s);
@@ -37,7 +35,7 @@ typedef struct map_config
     int y_size;
     int c_count;
     int exit;
-    int enemy;
+    int enemie;
     int player;
     int player_position[2];//0 -> y | 1 -> x
     int **enemies_positions;//0 - y | 1 - x
@@ -196,13 +194,13 @@ typedef struct player //player --> dying --> alive --> alive left
     t_p_down player_down;
 }   t_player;
 
-typedef struct enemy
+typedef struct enemie
 {
     void *img_open;
     char *path_open;
     int img_width_open;
     int img_height_open;
-}   t_enemy;
+}   t_enemie;
 
 typedef struct font
 {
@@ -255,7 +253,7 @@ typedef struct textures
     t_field field;
     t_wall wall;
     t_player player;
-    t_enemy enemy;
+    t_enemie enemie;
     t_font font;
 }   t_textures;
 
@@ -277,7 +275,7 @@ typedef struct window
 void get_map_config(t_m_config *map_config, char **map);
 
 //map check
-int get_width(char *line);
+int get_width(char *line, char **map);
 int get_lines(char **map, t_m_config *map_cnfg, int x_size);
 // void is_valid_map(char **map);
 

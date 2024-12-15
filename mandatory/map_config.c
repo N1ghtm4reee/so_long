@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:30:03 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/14 21:30:04 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/15 12:39:19 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ int is_outsider_char(char c)
     return 1;
 }
 
-int get_width(char *line)
+int get_width(char *line, char **map)
 {
     int i = 0;
     while(line && line[i] && line[i] != '\n')
     {
         if (line[i] != '1')
         {
+            free_map(map);
             write(2, "INVALID BORDERS\n", 16);
             exit(2);
         }
@@ -45,6 +46,7 @@ int get_lines(char **map, t_m_config *map_cnfg, int x_size)
         {
             if (is_outsider_char(map[y][i]))
             {
+                free_map(map);
                 write(2, "INVALID COMPONENT\n", 18);
                 exit(2);
             }

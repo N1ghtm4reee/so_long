@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:46:45 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/15 09:07:58 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/15 14:37:17 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,6 @@ void free_int_arr(int **arr, int size)
 {
     int i = 0;
     while(i < size)
-    {
-        free(arr[i]);
-        // free(arr[i][1]);
-        i++;
-    }
+        free(arr[i++]);
+    free(arr);
 }

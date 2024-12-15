@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:10:05 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/15 08:44:46 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/15 09:43:09 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void player_init(t_textures *all, t_window *var)
 
 void init_textures(t_textures *all, t_window *var)
 {
-    // var->moves = 0;
-    // var->collected = 0;
-    // var->got_all = 0;
-    // var->last_key = '.';
+    var->moves = 0;
+    var->collected = 0;
+    var->got_all = 0;
+    var->last_key = '.';
     all->exit.path = "rsrcs/exit.xpm";
     all->exit.img = mlx_xpm_file_to_image(var->mlx_connection, all->exit.path, &all->exit.img_width, &all->exit.img_height);
     all->collectable.path = "rsrcs/op_food.xpm";

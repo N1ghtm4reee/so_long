@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:10:05 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/14 17:11:20 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/15 14:36:22 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void init_textures(t_textures *all, t_window *var)
     all->wall.img = mlx_xpm_file_to_image(var->mlx_connection, all->wall.path, &all->wall.img_width, &all->wall.img_height);
     all->field.path = "rsrcs/1.1.xpm";
     all->field.img = mlx_xpm_file_to_image(var->mlx_connection, all->field.path, &all->field.img_width, &all->field.img_height);
-    all->enemy.path_open = "rsrcs/ghost.xpm";
-    all->enemy.img_open = mlx_xpm_file_to_image(var->mlx_connection, all->enemy.path_open, &all->enemy.img_width_open, &all->enemy.img_height_open);
+    all->enemie.path_open = "rsrcs/ghost.xpm";
+    all->enemie.img_open = mlx_xpm_file_to_image(var->mlx_connection, all->enemie.path_open, &all->enemie.img_width_open, &all->enemie.img_height_open);
     all->font.path_open0 = "rsrcs/Fonts/0.xpm";
     all->font.img_open0 = mlx_xpm_file_to_image(var->mlx_connection, all->font.path_open0, &all->font.img_width_open0, &all->font.img_height_open0);
     all->font.path_open1 = "rsrcs/Fonts/1.xpm";

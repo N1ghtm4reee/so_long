@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:04:50 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/14 14:48:44 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/15 09:25:34 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void flood_fill_check(char **map, int start_x, int start_y, t_m_config *map_cnfg
 void is_winable(char **map, t_m_config *map_config)
 {
 	char **t_map = map_copy(map, map_config);
-    flood_fill_check(t_map, map_config->player_position[1], map_config->player_position[0], map_config);
+    flood_fill_check(t_map, map_config->player_pos[1], map_config->player_pos[0], map_config);
     if (map_config->winable == 0)
     {
 		free_map(t_map);

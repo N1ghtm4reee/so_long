@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:16:47 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/14 17:10:49 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/15 14:36:51 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	print_map_on_screen(char **map, t_m_config map_config, t_window *var, t_tex
             if (map[y][x] == 'E' && var->got_all == 1)
                 mlx_put_image_to_window(var->mlx_connection, var->mlx_window, all->exit.img, x_offset, y_offset);
             if (map[y][x] == 'F')
-                mlx_put_image_to_window(var->mlx_connection, var->mlx_window, all->enemy.img_open, x_offset, y_offset);
+                mlx_put_image_to_window(var->mlx_connection, var->mlx_window, all->enemie.img_open, x_offset, y_offset);
             x_offset += all->field.img_width;
             x++;
         }
