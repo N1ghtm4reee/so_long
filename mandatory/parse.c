@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:04:36 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/15 17:41:03 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/15 21:00:24 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	last_row(char *last_row, char **map)
 	int	i;
 
 	i = 0;
-	while (last_row[i])
+	while (last_row[i + 1])
 	{
 		if (last_row[i] != '1')
 		{
 			free_map(map);
 			write(2, "INVALID BORDERS\n", 16);
-			exit(2);
+			exit(1);
 		}
 		i++;
 	}
@@ -49,7 +49,6 @@ void	get_player_position(t_m_config *map_config, char **map)
 			{
 				map_config->exit_position[0] = i;
 				map_config->exit_position[1] = j;
-				map[i][j] = '0';
 			}
 			j++;
 		}
@@ -91,4 +90,5 @@ void	get_map_config(t_m_config *map_config, char **map)
 	check_map_config(map_config, map);
 	get_player_position(map_config, map);
 	is_winable(map, map_config);
+	map[map_config->exit_position[0]][map_config->exit_position[1]] = '0';
 }
