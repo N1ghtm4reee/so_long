@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 21:01:02 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/15 21:07:49 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/16 11:36:24 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ typedef struct player_up
 	int		img_height_semi;
 }	t_p_up;
 
-typedef struct player //player --> dying --> alive --> alive left
+typedef struct player
 {
 	t_p_left	player_left;
 	t_p_right	player_right;
@@ -193,6 +193,7 @@ void	is_right_extension(char *str);
 //free
 void	free_map(char **map);
 int		close_window(t_window *var);
+void	destroy_image(t_window *var);
 
 //
 void	ft_putnbr(int nb);

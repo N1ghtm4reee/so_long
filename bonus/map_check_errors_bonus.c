@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:04:50 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/14 17:10:55 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/16 10:24:31 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,38 +57,74 @@ char	*ft_itoa(int n)
 	return (d);
 }
 
-void flood_fill_check(char **map, int start_x, int start_y, t_m_config *map_cnfg)
+void	can_reach_exit(char **map, int x, int y, t_m_config *map_cnfg)
 {
-    if (map[start_y][start_x] == 'F' || map[start_y][start_x] == '1')
-        return ;
-    if (start_x == map_cnfg->exit_position[1] && start_y == map_cnfg->exit_position[0])
-        map_cnfg->winable = 1;
-    if (map[start_y][start_x] == 'C')
-        map_cnfg->reachable_c++;
-    map[start_y][start_x] = 'F';
-    flood_fill_check(map, start_x++, start_y, map_cnfg);
-    flood_fill_check(map, start_x--, start_y, map_cnfg);
-    flood_fill_check(map, start_x, start_y++, map_cnfg);
-    flood_fill_check(map, start_x, start_y--, map_cnfg);
+	if (x < 0 || y < 0 || x > map_cnfg->x_size
+		|| y > map_cnfg->y_size || map[y][x] == '1' )
+		return ;
+	if (map[y][x] == 'E')
+	{
+		map_cnfg->winable = 1;
+		return ;
+	}
+	if (map[y][x] == 'C')
+		map_cnfg->reachable_c++;
+	map[y][x] = '1';
+	can_reach_exit(map, x + 1, y, map_cnfg);
+	can_reach_exit(map, x - 1, y, map_cnfg);
+	can_reach_exit(map, x, y + 1, map_cnfg);
+	can_reach_exit(map, x, y - 1, map_cnfg);
 }
 
-void is_winable(char **map, t_m_config *map_config)
+void	is_winable(char **map, t_m_config *map_config)
 {
-	char **t_map = map_copy(map, map_config);
-    flood_fill_check(t_map, map_config->player_position[1], map_config->player_position[0], map_config);
-    if (map_config->winable == 0)
-    {
+	char	**t_map;
+
+	t_map = map_copy(map, map_config);
+	can_reach_exit(t_map, map_config->player_position[1],
+		map_config->player_position[0], map_config);
+	if (map_config->winable == 0)
+	{
 		free_map(t_map);
 		free_map(map);
-        write(2, "NOT WINABLE MAP\n", 16);
-        exit(2);
-    }
-    if (map_config->reachable_c != map_config->c_count)
-    {
+		write(2, "NOT WINABLE MAP\n", 16);
+		exit(2);
+	}
+	if (map_config->reachable_c != map_config->c_count)
+	{
 		free_map(t_map);
 		free_map(map);
-	    write(2, "NOT REACHABLE COLLECTABLE\n", 26);
-        exit(2);
-    }
+		write(2, "NOT REACHABLE COLLECTABLE\n", 26);
+		exit(1);
+	}
 	free_map(t_map);
+}
+
+void	enemies_position(char **map, t_m_config *map_cnfg)
+{
+	int	r[3];
+
+	r[0] = 0;
+	map_cnfg->enemies_positions = malloc(sizeof(int *)
+			* map_cnfg->enemies_count);
+	while (r[0] < map_cnfg->enemies_count)
+	{
+		map_cnfg->enemies_positions[r[0]] = malloc(sizeof(int) * 2);
+		r[0]++;
+	}
+	r[0] = 0;
+	r[2] = 0;
+	while (map[++r[0]])
+	{
+		r[1] = 0;
+		while (map[r[0]][++r[1]])
+		{
+			if (map[r[0]][r[1]] == 'F')
+			{
+				map_cnfg->enemies_positions[r[2]][0] = r[0];
+				map_cnfg->enemies_positions[r[2]][1] = r[1];
+				r[2]++;
+			}
+		}
+	}
 }

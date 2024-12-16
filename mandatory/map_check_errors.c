@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:04:50 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/15 21:00:42 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/16 11:37:37 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,13 @@ void	is_winable(char **map, t_m_config *map_config)
 		free_map(t_map);
 		free_map(map);
 		write(2, "NOT WINABLE MAP\n", 16);
+		exit(1);
+	}
+	if (map_config->reachable_c != map_config->c_count)
+	{
+		free_map(t_map);
+		free_map(map);
+		write(2, "NOT REACHABLE COLLECTABLE\n", 26);
 		exit(1);
 	}
 	free_map(t_map);

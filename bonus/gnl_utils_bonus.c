@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gnl_utils_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/16 09:24:02 by aakhrif           #+#    #+#             */
+/*   Updated: 2024/12/16 09:24:04 by aakhrif          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long_bonus.h"
 
 int	ft_strchr(char *s, char c)
@@ -31,9 +43,7 @@ size_t	ft_strlen(char *s)
 void	*ft_calloc(size_t count, size_t size)
 {
 	char	*ptr;
-	size_t	i;
 
-	i = 0;
 	if (!count || !size)
 		return (NULL);
 	if (size != 0 && size > (SIZE_MAX / count))
