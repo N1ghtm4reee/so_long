@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:04:50 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/16 11:37:37 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/29 15:13:27 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ void	can_reach_exit(char **map, int x, int y, t_m_config *map_cnfg)
 		|| y > map_cnfg->y_size || map[y][x] == '1' )
 		return ;
 	if (map[y][x] == 'E')
-	{
 		map_cnfg->winable = 1;
-		return ;
-	}
 	if (map[y][x] == 'C')
 		map_cnfg->reachable_c++;
 	map[y][x] = '1';

@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:30:03 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/16 10:22:43 by aakhrif          ###   ########.fr       */
+/*   Updated: 2025/01/02 12:48:48 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	get_line_error(char **map, int flag)
 		write(2, "NOT RECTANGULAR MAP\n", 20);
 	if (!flag)
 		write(2, "INVALID BORDERS\n", 16);
-	exit(1);
+	exit(11);
 }
 
 int	get_lines(char **map, t_m_config *map_cnfg, int x_size)
@@ -95,7 +95,7 @@ char	**map_copy(char **map, t_m_config *map_config)
 			while (i)
 				free(t_map[i--]);
 			free(t_map);
-			exit(1);
+			exit(11);
 		}
 		i++;
 	}

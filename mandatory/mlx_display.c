@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:16:47 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/15 17:40:28 by aakhrif          ###   ########.fr       */
+/*   Updated: 2025/01/04 11:28:38 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,4 @@ void	print_map_on_screen(char **map, t_window *var, t_textures *all)
 		mlx_put_image_to_window(var->mlx_connection, var->mlx_window,
 			all->wall.img, x_offset, y_offset - all->field.img_height);
 	x_offset -= all->field.img_width;
-	print_moves_nl(var->moves);
 }

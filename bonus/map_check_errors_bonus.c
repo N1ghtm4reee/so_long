@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:04:50 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/16 10:24:31 by aakhrif          ###   ########.fr       */
+/*   Updated: 2025/01/02 12:57:39 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ void	can_reach_exit(char **map, int x, int y, t_m_config *map_cnfg)
 		|| y > map_cnfg->y_size || map[y][x] == '1' )
 		return ;
 	if (map[y][x] == 'E')
-	{
 		map_cnfg->winable = 1;
-		return ;
-	}
 	if (map[y][x] == 'C')
 		map_cnfg->reachable_c++;
 	map[y][x] = '1';
@@ -95,7 +92,7 @@ void	is_winable(char **map, t_m_config *map_config)
 		free_map(t_map);
 		free_map(map);
 		write(2, "NOT REACHABLE COLLECTABLE\n", 26);
-		exit(1);
+		exit(11);
 	}
 	free_map(t_map);
 }
@@ -105,11 +102,11 @@ void	enemies_position(char **map, t_m_config *map_cnfg)
 	int	r[3];
 
 	r[0] = 0;
-	map_cnfg->enemies_positions = malloc(sizeof(int *)
+	map_cnfg->e_p = malloc(sizeof(int *)
 			* map_cnfg->enemies_count);
 	while (r[0] < map_cnfg->enemies_count)
 	{
-		map_cnfg->enemies_positions[r[0]] = malloc(sizeof(int) * 2);
+		map_cnfg->e_p[r[0]] = malloc(sizeof(int) * 2);
 		r[0]++;
 	}
 	r[0] = 0;
@@ -121,8 +118,8 @@ void	enemies_position(char **map, t_m_config *map_cnfg)
 		{
 			if (map[r[0]][r[1]] == 'F')
 			{
-				map_cnfg->enemies_positions[r[2]][0] = r[0];
-				map_cnfg->enemies_positions[r[2]][1] = r[1];
+				map_cnfg->e_p[r[2]][0] = r[0];
+				map_cnfg->e_p[r[2]][1] = r[1];
 				r[2]++;
 			}
 		}

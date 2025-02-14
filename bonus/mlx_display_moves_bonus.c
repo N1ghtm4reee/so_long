@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 09:43:33 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/16 10:36:24 by aakhrif          ###   ########.fr       */
+/*   Updated: 2025/01/02 12:42:43 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	wich_number2(t_window *var, t_textures *all, char c, int *arr)
 
 void	wich_number(t_window *var, t_textures *all, char c, int *arr)
 {
-	if ((c - '0') < 5)
+	if ((c - '0') <= 5)
 		wich_number2(var, all, c, arr);
 	if (c == '6')
 		mlx_put_image_to_window(var->mlx_connection,
@@ -58,8 +58,8 @@ void	print_number_on_screen(char *nbr, t_textures *all, t_window *var)
 	int	arr[2];
 
 	i = 0;
-	arr[0] = var->map_cnfg.x_size;
-	arr[1] = var->map_cnfg.y_size;
+	arr[0] = var->map_cnfg->x_size;
+	arr[1] = var->map_cnfg->y_size;
 	while (nbr[i])
 	{
 		wich_number(var, all, nbr[i], arr);

@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:04:36 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/15 21:00:24 by aakhrif          ###   ########.fr       */
+/*   Updated: 2024/12/29 16:48:32 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	get_player_position(t_m_config *map_config, char **map)
 
 void	check_map_config(t_m_config *map_config, char **map)
 {
-	if (map_config->x_size == map_config->y_size)
-		return (write(2, "NOT RECTANGULAR MAP\n", 20), free_map(map), exit(1));
 	if (map_config->y_size < 3)
 		return (write(2, "TINNY MAP\n", 10), free_map(map), exit(1));
 	last_row(map[map_config->y_size - 1], map);

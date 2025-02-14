@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:15:17 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/15 18:45:04 by aakhrif          ###   ########.fr       */
+/*   Updated: 2025/01/04 11:27:57 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	left_key(t_window *var, int player_x, int player_y)
 		var->map_cnfg.player_pos[1]--;
 		var->last_key = 'A';
 		var->moves++;
+		print_moves_nl(var->moves);
 	}
 }
 
@@ -61,6 +62,7 @@ void	right_key(t_window *var, int player_x, int player_y)
 		var->map_cnfg.player_pos[1]++;
 		var->last_key = 'D';
 		var->moves++;
+		print_moves_nl(var->moves);
 	}
 }
 
@@ -87,6 +89,7 @@ void	up_key(t_window *var, int player_x, int player_y)
 		var->map_cnfg.player_pos[0]--;
 		var->last_key = 'W';
 		var->moves++;
+		print_moves_nl(var->moves);
 	}
 }
 
@@ -113,6 +116,7 @@ void	down_key(t_window *var, int player_x, int player_y)
 		var->map_cnfg.player_pos[0]++;
 		var->last_key = 'S';
 		var->moves++;
+		print_moves_nl(var->moves);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 21:01:02 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/16 11:36:24 by aakhrif          ###   ########.fr       */
+/*   Updated: 2025/01/01 15:50:15 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ int		get_width(char *line, char **map);
 int		get_lines(char **map, t_m_config *map_cnfg, int x_size);
 
 //textures
-void	init_textures(t_textures *all, t_window *var);
+void	init_textures(char **map, t_textures *all, t_window *var);
 void	print_map_on_screen(char **map, t_window *var, t_textures *all);
 void	is_winable(char **map, t_m_config *map_config);
 char	*ft_itoa(int n);
@@ -198,5 +198,17 @@ void	destroy_image(t_window *var);
 //
 void	ft_putnbr(int nb);
 void	print_moves_nl(int move);
+
+//clean images
+void	clean_image10(char **map, t_textures *all, t_window *var);
+void	clean_image9(char **map, t_textures *all, t_window *var);
+void	clean_image8(char **map, t_textures *all, t_window *var);
+void	clean_image7(char **map, t_textures *all, t_window *var);
+void	clean_image6(char **map, t_textures *all, t_window *var);
+void	clean_image5(char **map, t_textures *all, t_window *var);
+void	clean_image4(char **map, t_textures *all, t_window *var);
+void	clean_image3(char **map, t_textures *all, t_window *var);
+void	clean_image2(char **map, t_textures *all, t_window *var);
+void	clean_image1(char **map, t_textures *all, t_window *var);
 
 #endif

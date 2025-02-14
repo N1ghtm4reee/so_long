@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:13:40 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/16 11:36:57 by aakhrif          ###   ########.fr       */
+/*   Updated: 2025/01/01 18:04:37 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_mlx_work(char **map, t_m_config map_config)
 	var.mlx_connection = mlx_init();
 	if (!var.mlx_connection)
 		exit(1);
-	init_textures(&all_textures, &var);
+	init_textures(map, &all_textures, &var);
 	var.tmap = map;
 	var.map_cnfg = map_config;
 	var.all_textures = all_textures;
@@ -79,9 +79,6 @@ void	ft_mlx_work(char **map, t_m_config map_config)
 	mlx_hook(var.mlx_window, 17, 0, close_window, &var);
 	mlx_key_hook(var.mlx_window, key_hook, &var);
 	mlx_loop(var.mlx_connection);
-	mlx_destroy_window(var.mlx_connection, var.mlx_window);
-	mlx_destroy_display(var.mlx_connection);
-	free(var.mlx_connection);
 }
 
 int	main(int ac, char **av)

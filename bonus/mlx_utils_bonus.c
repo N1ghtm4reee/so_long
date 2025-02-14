@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 20:18:15 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/16 08:57:21 by aakhrif          ###   ########.fr       */
+/*   Updated: 2025/01/02 12:48:36 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ void	is_right_extension(char *str)
 	if (ft_strcmp(str + i, ".ber"))
 	{
 		write(2, "INVALID FILE EXTENSION\n", 23);
-		exit(1);
+		exit(11);
 	}
 }

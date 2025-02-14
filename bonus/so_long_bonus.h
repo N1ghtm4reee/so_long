@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:27:14 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/16 11:43:48 by aakhrif          ###   ########.fr       */
+/*   Updated: 2025/01/02 12:56:09 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct map_config
 	int	enemie;
 	int	player;
 	int	player_position[2];
-	int	**enemies_positions;
+	int	**e_p;
 	int	exit_position[2];
 }	t_m_config;
 
@@ -204,12 +204,12 @@ typedef struct font
 
 typedef struct textures
 {
+	t_enemie	enemie;
 	t_exit		exit;
 	t_collec	collectable;
 	t_field		field;
 	t_wall		wall;
 	t_player	player;
-	t_enemie	enemie;
 	t_font		font;
 }	t_textures;
 
@@ -220,7 +220,7 @@ typedef struct window
 	int			got_all;
 	int			collected;
 	t_textures	all_textures;
-	t_m_config	map_cnfg;
+	t_m_config	*map_cnfg;
 	char		**tmap;
 	void		*mlx_connection;
 	void		*mlx_window;
@@ -237,13 +237,13 @@ int		get_lines(char **map, t_m_config *map_cnfg, int x_size);
 
 void	move_left_right(t_window *var, t_textures *all, int x, int y);
 void	move_up_down(t_window *var, t_textures *all, int x, int y);
-void	get_fonts(t_textures *all, t_window *var);
+void	get_fonts(char **map, t_textures *all, t_window *var);
 void	player_image_opt(t_window *var, t_textures *all, int x, int y);
 void	print_number_on_screen(char *nbr, t_textures *all, t_window *var);
 
 //textures
-void	init_textures(t_textures *all, t_window *var);
-void	move_ghosts(t_window *var);
+void	init_textures(char **map, t_textures *all, t_window *var);
+int		move_ghosts(t_window *var);
 void	print_map_on_screen(char **map, t_window *var, t_textures *all);
 void	is_winable(char **map, t_m_config *map_config);
 char	*ft_itoa(int n);
@@ -262,5 +262,28 @@ void	free_map(char **map);
 int		close_window(t_window *var);
 void	free_int_arr(int **arr, int size);
 void	destroy_images(t_window *var);
+
+//clean images
+void	clean_image10(char **map, t_textures *all, t_window *var);
+void	clean_image9(char **map, t_textures *all, t_window *var);
+void	clean_image8(char **map, t_textures *all, t_window *var);
+void	clean_image7(char **map, t_textures *all, t_window *var);
+void	clean_image6(char **map, t_textures *all, t_window *var);
+void	clean_image5(char **map, t_textures *all, t_window *var);
+void	clean_image4(char **map, t_textures *all, t_window *var);
+void	clean_image3(char **map, t_textures *all, t_window *var);
+void	clean_image2(char **map, t_textures *all, t_window *var);
+void	clean_image1(char **map, t_textures *all, t_window *var);
+void	clean_ghost(char **map, t_textures *all, t_window *var);
+void	font_clean1(char **map, t_textures *all, t_window *var);
+void	font_clean2(char **map, t_textures *all, t_window *var);
+void	font_clean3(char **map, t_textures *all, t_window *var);
+void	font_clean4(char **map, t_textures *all, t_window *var);
+void	font_clean5(char **map, t_textures *all, t_window *var);
+void	font_clean6(char **map, t_textures *all, t_window *var);
+void	font_clean7(char **map, t_textures *all, t_window *var);
+void	font_clean8(char **map, t_textures *all, t_window *var);
+void	font_clean9(char **map, t_textures *all, t_window *var);
+void	font_clean10(char **map, t_textures *all, t_window *var);
 
 #endif

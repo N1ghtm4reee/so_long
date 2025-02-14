@@ -6,7 +6,7 @@
 /*   By: aakhrif <aakhrif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:46:45 by aakhrif           #+#    #+#             */
-/*   Updated: 2024/12/16 11:38:08 by aakhrif          ###   ########.fr       */
+/*   Updated: 2025/01/02 12:55:25 by aakhrif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,6 @@ int	close_window(t_window *var)
 	mlx_destroy_display(var->mlx_connection);
 	free(var->mlx_connection);
 	free_map(var->tmap);
-	free_int_arr(var->map_cnfg.enemies_positions, var->map_cnfg.enemies_count);
+	free_int_arr(var->map_cnfg->e_p, var->map_cnfg->enemies_count);
 	exit(0);
 }
